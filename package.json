@@ -1,0 +1,13 @@
+{
+  "name": "one-line-website-builder",
+  "version": "1.0.0",
+  "description": "An application that creates beautiful websites using a single-line prompt.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test generator.test.js"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InstaSite | Single-Line AI Website Builder</title>
+  <!-- Tailwind CSS & Flowbite/DaisyUI-inspired custom elements -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col overflow-hidden">
+
+  <!-- Main header -->
+  <header class="bg-white border-b border-slate-200 py-3 px-6 flex justify-between items-center z-10 shadow-sm">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/10">
+        <span class="text-white font-black text-xl">⚡</span>
+      </div>
+      <div>
+        <h1 class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">InstaSite</h1>
+        <p class="text-[10px] text-slate-500 font-bold tracking-wide uppercase">AI Single-Line Site Generator</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 flex items-center gap-1">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Production Ready
+      </span>
+      <a href="https://github.com" target="_blank" class="text-slate-500 hover:text-slate-900 transition-colors text-sm font-semibold">
+        Documentation
+      </a>
+    </div>
+  </header>
+
+  <!-- Workspace Container: Split Screen Layout -->
+  <main class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
+
+    <!-- Left Panel: Form & Editor -->
+    <section class="w-full lg:w-[450px] bg-white border-r border-slate-200 flex flex-col justify-between overflow-y-auto p-6 space-y-6">
+
+      <!-- Generator controls wrapper -->
+      <div class="space-y-6">
+        <div>
+          <h2 class="text-xl font-bold tracking-tight text-slate-900 mb-2">Build instantly</h2>
+          <p class="text-xs text-slate-500 leading-relaxed">Describe the website you want to generate in a simple single-line prompt. We will parse the keywords, choose the ideal color theme, customize the structure, and spin up an active preview.</p>
+        </div>
+
+        <!-- Prompt input and buttons -->
+        <div class="space-y-3">
+          <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-600">Your Prompt</label>
+          <div class="relative">
+            <textarea id="promptInput" rows="3" placeholder="e.g. An elegant farm-to-table bistro called 'The Herb Garden' with green and white theme"
+              class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-sm text-slate-800 placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition-all resize-none shadow-inner"></textarea>
+          </div>
+
+          <div class="flex gap-2">
+            <button id="generateBtn" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-emerald-600/10 hover:shadow-emerald-600/20 active:scale-98 transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+              <span id="btnIcon">✨</span>
+              <span id="btnText">Generate Site</span>
+            </button>
+            <button id="clearPromptBtn" title="Clear prompt" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-400 hover:text-slate-700 px-4 rounded-2xl transition-all duration-300">
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <!-- Prompt Suggestion Chips -->
+        <div class="space-y-2">
+          <span class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Need inspiration? Try these presets:</span>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="applyPreset('An elegant farm-to-table organic bistro called \'The Herb Garden\' with a gorgeous green and white layout')"
+              class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
+              🥗 Food Bistro
+            </button>
+            <button onclick="applyPreset('A modern organic wellness yoga studio called \'Green Pulse\' featuring a green and white theme')"
+              class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
+              💪 Gym Studio
+            </button>
+            <button onclick="applyPreset('A dark theme SaaS platform called \'TaskSync AI\' for team collaboration')"
+              class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
+              🚀 SaaS Platform
+            </button>
+            <button onclick="applyPreset('A beautiful minimal design portfolio called \'Alex Reed Designs\' in high-contrast white and emerald')"
+              class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
+              🎨 Resume Portfolio
+            </button>
+          </div>
+        </div>
+
+        <hr class="border-slate-100">
+
+        <!-- Manual Customizers -->
+        <div class="space-y-4">
+          <h3 class="text-sm font-bold text-slate-900 tracking-tight">Manual adjustments</h3>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Theme Color Selector -->
+            <div class="space-y-1.5">
+              <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Theme Color</label>
+              <select id="themeSelector" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none transition-all font-semibold">
+                <option value="green">Green & White (Light-Mode)</option>
+                <option value="blue">Blue / Indigo (Default)</option>
+                <option value="red">Red / Rose</option>
+                <option value="purple">Purple / Violet</option>
+                <option value="dark">Stealth Dark / Slate</option>
+              </select>
+            </div>
+
+            <!-- Industry Selector -->
+            <div class="space-y-1.5">
+              <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Industry Layout</label>
+              <select id="industrySelector" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none transition-all font-semibold">
+                <option value="restaurant">Restaurant / Culinary Cafe</option>
+                <option value="saas">SaaS / Software Product</option>
+                <option value="portfolio">Personal Portfolio / Resume</option>
+                <option value="fitness">Gym / Wellness Studio</option>
+                <option value="general">Generic Company / Agency</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Brand Name Input -->
+            <div class="space-y-1.5">
+              <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Brand Name</label>
+              <input type="text" id="brandNameInput" placeholder="Auto-extracted"
+                class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none transition-all font-semibold">
+            </div>
+
+            <!-- Tagline Override -->
+            <div class="space-y-1.5">
+              <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Tagline / Mission</label>
+              <input type="text" id="taglineInput" placeholder="Auto-extracted"
+                class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none transition-all font-semibold">
+            </div>
+          </div>
+        </div>
+
+        <hr class="border-slate-100">
+
+        <!-- Output Action Tools -->
+        <div class="space-y-3">
+          <label class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Export & Deployment Options</label>
+          <div class="grid grid-cols-2 gap-3">
+            <button id="copyCodeBtn" class="bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2">
+              📋 Copy HTML
+            </button>
+            <button id="downloadBtn" class="bg-emerald-500/10 hover:bg-emerald-500/25 text-emerald-700 border border-emerald-200 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2">
+              📥 Download ZIP
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer copyright -->
+      <div class="pt-6 border-t border-slate-100 text-[10px] text-slate-400 flex justify-between items-center">
+        <span>© InstaSite Enterprise AI Builder</span>
+        <span>Version 1.1.0</span>
+      </div>
+    </section>
+
+    <!-- Right Panel: Live Responsive Interactive Preview -->
+    <section class="flex-1 bg-slate-100 flex flex-col overflow-hidden">
+
+      <!-- Responsive viewport control header -->
+      <div class="bg-white border-b border-slate-200 py-2.5 px-6 flex justify-between items-center z-10 shadow-sm">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+          <span class="text-xs font-semibold text-slate-500 ml-2">Live Responsive Frame Sandbox</span>
+        </div>
+
+        <!-- Viewport Size Switchers -->
+        <div class="flex bg-slate-50 rounded-xl p-1 border border-slate-200">
+          <button id="viewportDesktopBtn" onclick="changeViewport('desktop')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm">
+            🖥 Desktop
+          </button>
+          <button id="viewportTabletBtn" onclick="changeViewport('tablet')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5">
+            📱 Tablet
+          </button>
+          <button id="viewportMobileBtn" onclick="changeViewport('mobile')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5">
+            🤳 Mobile
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Sandbox Iframe Holder -->
+      <div class="flex-1 flex items-center justify-center p-6 bg-slate-100/50 overflow-hidden relative">
+        <div id="iframeWrapper" class="w-full h-full border border-slate-200 rounded-3xl shadow-2xl bg-white overflow-hidden transition-all duration-300">
+          <iframe id="previewIframe" src="about:blank" class="w-full h-full border-0 bg-white"></iframe>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Notification Toasts (Success alerts) -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-emerald-600 text-white font-bold py-3 px-6 rounded-2xl shadow-xl shadow-emerald-600/10 border border-emerald-400/20 flex items-center gap-2 text-sm opacity-0 pointer-events-none translate-y-4 transition-all duration-300">
+    <span class="text-lg">✔</span> <span id="toastMessage">Success message</span>
+  </div>
+
+  <!-- Client-side application script logic -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
