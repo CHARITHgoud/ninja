@@ -55,3 +55,23 @@ test('generateHTML produces responsive Tailwind HTML containing brand content', 
   assert.ok(html.includes('A super powered tool'));
   assert.ok(html.includes('https://cdn.tailwindcss.com'));
 });
+
+test('parsePrompt and generateHTML handles clean parameter-driven configurations', () => {
+  const presetPrompt = "An organic eco restaurant named Herbology";
+  const specs = parsePrompt(presetPrompt);
+
+  // Verify parsed values match expected structures
+  assert.strictEqual(specs.industry, 'restaurant');
+  assert.strictEqual(specs.colors, 'green');
+  assert.ok(specs.name.includes('Herbology'));
+
+  const specsOverridden = {
+    ...specs,
+    colors: 'dark',
+    customTagline: 'Custom override'
+  };
+
+  const html = generateHTML(specsOverridden);
+  assert.ok(html.includes('Herbology'));
+  assert.ok(html.includes('Custom override'));
+});

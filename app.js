@@ -10,6 +10,7 @@ const brandNameInput = document.getElementById('brandNameInput');
 const taglineInput = document.getElementById('taglineInput');
 const copyCodeBtn = document.getElementById('copyCodeBtn');
 const downloadBtn = document.getElementById('downloadBtn');
+const copyShareBtn = document.getElementById('copyShareBtn');
 const previewIframe = document.getElementById('previewIframe');
 const iframeWrapper = document.getElementById('iframeWrapper');
 const btnIcon = document.getElementById('btnIcon');
@@ -164,15 +165,77 @@ function showToast(message, type = 'success') {
   }, 2500);
 }
 
-// Set initial default page values to green and white bistro theme
-promptInput.value = "An elegant farm-to-table organic bistro called 'Golden Grain Bistro' with a gorgeous green and white layout";
-currentSpecs = {
-  industry: 'restaurant',
-  colors: 'green',
-  name: 'Golden Grain Bistro',
-  customTagline: 'An elegant farm-to-table organic bistro in Chicago'
-};
-renderPreview();
+// Detect if running in fullscreen preview mode via URL parameters
+function setupFromURLParams() {
+  const params = new URLSearchParams(window.location.search);
+  const promptParam = params.get('prompt');
+  const previewParam = params.get('preview');
+  const industryParam = params.get('industry');
+  const colorParam = params.get('colors');
+  const nameParam = params.get('name');
+  const taglineParam = params.get('tagline');
+
+  if (previewParam === 'true' && promptParam) {
+    // Fullscreen sharing/preview mode
+    // Hide UI elements
+    document.getElementById('mainHeader').classList.add('hidden');
+    document.getElementById('editorPanel').classList.add('hidden');
+    document.getElementById('viewportHeader').classList.add('hidden');
+
+    // Stretch container and remove frame wrappers / borders / shadows / padding
+    const iframeContainer = document.getElementById('iframeContainer');
+    iframeContainer.className = 'w-full h-full p-0 overflow-hidden';
+
+    const iframeWrapper = document.getElementById('iframeWrapper');
+    iframeWrapper.className = 'w-full h-full border-0 rounded-none shadow-none';
+    iframeWrapper.style.maxWidth = '100%';
+
+    // Extract specifications
+    const specs = parsePrompt(promptParam);
+    if (industryParam) specs.industry = industryParam;
+    if (colorParam) specs.colors = colorParam;
+    if (nameParam) specs.name = nameParam;
+    if (taglineParam) specs.customTagline = taglineParam;
+
+    currentSpecs = specs;
+    renderPreview();
+    return true;
+  } else if (promptParam) {
+    // Normal builder mode but preloaded with prompt parameters
+    promptInput.value = promptParam;
+    const specs = parsePrompt(promptParam);
+    if (industryParam) specs.industry = industryParam;
+    if (colorParam) specs.colors = colorParam;
+    if (nameParam) specs.name = nameParam;
+    if (taglineParam) specs.customTagline = taglineParam;
+
+    currentSpecs = specs;
+
+    // Sync UI elements
+    industrySelector.value = specs.industry;
+    themeSelector.value = specs.colors;
+    brandNameInput.value = specs.name || '';
+    taglineInput.value = specs.customTagline || '';
+
+    renderPreview();
+    return true;
+  }
+  return false;
+}
+
+// Initialise page configuration
+const loadedFromUrl = setupFromURLParams();
+if (!loadedFromUrl) {
+  // Set initial default page values to green and white bistro theme
+  promptInput.value = "An elegant farm-to-table organic bistro called 'Golden Grain Bistro' with a gorgeous green and white layout";
+  currentSpecs = {
+    industry: 'restaurant',
+    colors: 'green',
+    name: 'Golden Grain Bistro',
+    customTagline: 'An elegant farm-to-table organic bistro in Chicago'
+  };
+  renderPreview();
+}
 
 // Event bindings
 generateBtn.addEventListener('click', handleGeneration);
@@ -196,6 +259,31 @@ copyCodeBtn.addEventListener('click', () => {
   navigator.clipboard.writeText(currentGeneratedHTML)
     .then(() => showToast('Generated HTML copied to clipboard!', 'success'))
     .catch(() => showToast('Failed to copy to clipboard', 'error'));
+});
+
+copyShareBtn.addEventListener('click', () => {
+  const currentPrompt = promptInput.value.trim();
+  if (!currentPrompt) {
+    showToast('Generate a website first to share it.', 'error');
+    return;
+  }
+
+  // Create query parameters with specifications
+  const params = new URLSearchParams();
+  params.set('prompt', currentPrompt);
+  params.set('preview', 'true');
+  if (currentSpecs.industry) params.set('industry', currentSpecs.industry);
+  if (currentSpecs.colors) params.set('colors', currentSpecs.colors);
+  if (currentSpecs.name) params.set('name', currentSpecs.name);
+  if (currentSpecs.customTagline) params.set('tagline', currentSpecs.customTagline);
+
+  // Construct absolute URL
+  const baseUrl = window.location.origin + window.location.pathname;
+  const shareUrl = `${baseUrl}?${params.toString()}`;
+
+  navigator.clipboard.writeText(shareUrl)
+    .then(() => showToast('Custom Share Link copied to clipboard!', 'success'))
+    .catch(() => showToast('Failed to copy link to clipboard', 'error'));
 });
 
 downloadBtn.addEventListener('click', () => {

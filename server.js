@@ -21,7 +21,9 @@ const MIME_TYPES = {
 };
 
 const server = http.createServer((req, res) => {
-  let filePath = req.url === '/' ? './index.html' : `.${req.url}`;
+  // Strip query parameters from URL path
+  const parsedUrl = req.url.split('?')[0];
+  let filePath = parsedUrl === '/' ? './index.html' : `.${parsedUrl}`;
 
   // Resolve paths relative to __dirname to prevent path traversal
   filePath = path.resolve(__dirname, filePath);

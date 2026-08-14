@@ -27,7 +27,7 @@
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col overflow-hidden">
 
   <!-- Main header -->
-  <header class="bg-white border-b border-slate-200 py-3 px-6 flex justify-between items-center z-10 shadow-sm">
+  <header id="mainHeader" class="bg-white border-b border-slate-200 py-3 px-6 flex justify-between items-center z-10 shadow-sm">
     <div class="flex items-center gap-3">
       <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-500/10">
         <span class="text-white font-black text-xl">⚡</span>
@@ -52,7 +52,7 @@
   <main class="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
 
     <!-- Left Panel: Form & Editor -->
-    <section class="w-full lg:w-[450px] bg-white border-r border-slate-200 flex flex-col justify-between overflow-y-auto p-6 space-y-6">
+    <section id="editorPanel" class="w-full lg:w-[450px] bg-white border-r border-slate-200 flex flex-col justify-between overflow-y-auto p-6 space-y-6">
 
       <!-- Generator controls wrapper -->
       <div class="space-y-6">
@@ -165,6 +165,9 @@
               📥 Download HTML
             </button>
           </div>
+          <button id="copyShareBtn" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2">
+            🔗 Copy Share Link (Fullscreen)
+          </button>
         </div>
       </div>
 
@@ -176,10 +179,10 @@
     </section>
 
     <!-- Right Panel: Live Responsive Interactive Preview -->
-    <section class="flex-1 bg-slate-100 flex flex-col overflow-hidden">
+    <section id="previewPanel" class="flex-1 bg-slate-100 flex flex-col overflow-hidden">
 
       <!-- Responsive viewport control header -->
-      <div class="bg-white border-b border-slate-200 py-2.5 px-6 flex justify-between items-center z-10 shadow-sm">
+      <div id="viewportHeader" class="bg-white border-b border-slate-200 py-2.5 px-6 flex justify-between items-center z-10 shadow-sm">
         <div class="flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-rose-400"></span>
           <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
@@ -202,7 +205,7 @@
       </div>
 
       <!-- Live Sandbox Iframe Holder -->
-      <div class="flex-1 flex items-center justify-center p-6 bg-slate-100/50 overflow-hidden relative">
+      <div id="iframeContainer" class="flex-1 flex items-center justify-center p-6 bg-slate-100/50 overflow-hidden relative">
         <div id="iframeWrapper" class="w-full h-full border border-slate-200 rounded-3xl shadow-2xl bg-white overflow-hidden transition-all duration-300">
           <iframe id="previewIframe" src="about:blank" class="w-full h-full border-0 bg-white"></iframe>
         </div>
