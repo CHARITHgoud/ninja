@@ -39,19 +39,23 @@ function changeViewport(device) {
   const btnTablet = document.getElementById('viewportTabletBtn');
   const btnMobile = document.getElementById('viewportMobileBtn');
 
-  // Reset styles
+  // Reset styles and ARIA selected states
   [btnDesktop, btnTablet, btnMobile].forEach(btn => {
-    btn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5';
+    btn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none';
+    btn.setAttribute('aria-selected', 'false');
   });
 
   if (device === 'desktop') {
-    btnDesktop.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm';
+    btnDesktop.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none';
+    btnDesktop.setAttribute('aria-selected', 'true');
     iframeWrapper.style.maxWidth = '100%';
   } else if (device === 'tablet') {
-    btnTablet.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm';
+    btnTablet.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none';
+    btnTablet.setAttribute('aria-selected', 'true');
     iframeWrapper.style.maxWidth = '768px';
   } else if (device === 'mobile') {
-    btnMobile.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm';
+    btnMobile.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none';
+    btnMobile.setAttribute('aria-selected', 'true');
     iframeWrapper.style.maxWidth = '410px';
   }
 }
