@@ -1,0 +1,3 @@
+## 2025-10-24 - Semantic Labeling and Dynamic ARIA Tab States for Viewport Switchers
+**Learning:** Icon-heavy UI elements and custom tab-like buttons (such as responsive viewport switchers) must be carefully marked up with explicit `for`/`id` associations and dynamic ARIA attributes (`role="tab"`, `aria-selected`, `aria-label`). Without these, screen reader users can neither perceive the purpose of interactive tools nor understand which device preview mode is currently active.
+**Action:** Always map labels to inputs, supply `aria-label`s for icon/emoji-only controls, hide purely decorative emoji characters with `aria-hidden="true"`, and use dynamic JS to synchronize live accessibility attributes like `aria-selected="true/false"`.

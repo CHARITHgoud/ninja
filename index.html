@@ -63,19 +63,19 @@
 
         <!-- Prompt input and buttons -->
         <div class="space-y-3">
-          <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-600">Your Prompt</label>
+          <label for="promptInput" class="block text-xs font-extrabold uppercase tracking-wider text-slate-600">Your Prompt</label>
           <div class="relative">
             <textarea id="promptInput" rows="3" placeholder="e.g. An elegant farm-to-table bistro called 'The Herb Garden' with green and white theme"
-              class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-sm text-slate-800 placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none transition-all resize-none shadow-inner"></textarea>
+              class="w-full bg-slate-50 border border-slate-200 rounded-2xl p-4 text-sm text-slate-800 placeholder-slate-400 focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 transition-all resize-none shadow-inner"></textarea>
           </div>
 
           <div class="flex gap-2">
-            <button id="generateBtn" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-emerald-600/10 hover:shadow-emerald-600/20 active:scale-98 transition-all duration-300 flex items-center justify-center gap-2 text-sm">
-              <span id="btnIcon">✨</span>
+            <button id="generateBtn" aria-label="Generate website from prompt" class="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-emerald-600/10 hover:shadow-emerald-600/20 active:scale-98 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+              <span id="btnIcon" aria-hidden="true">✨</span>
               <span id="btnText">Generate Site</span>
             </button>
-            <button id="clearPromptBtn" title="Clear prompt" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-400 hover:text-slate-700 px-4 rounded-2xl transition-all duration-300">
-              ✕
+            <button id="clearPromptBtn" aria-label="Clear current prompt text" title="Clear prompt" class="bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-400 hover:text-slate-700 px-4 rounded-2xl focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none transition-all duration-300">
+              <span aria-hidden="true">✕</span>
             </button>
           </div>
         </div>
@@ -85,20 +85,24 @@
           <span class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Need inspiration? Try these presets:</span>
           <div class="flex flex-wrap gap-2">
             <button data-preset="An elegant farm-to-table organic bistro called 'The Herb Garden' with a gorgeous green and white layout"
-              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
-              🥗 Food Bistro
+              aria-label="Use preset: Food Bistro"
+              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none transition-all font-medium">
+              <span aria-hidden="true">🥗</span> Food Bistro
             </button>
             <button data-preset="A modern organic wellness yoga studio called 'Green Pulse' featuring a green and white theme"
-              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
-              💪 Gym Studio
+              aria-label="Use preset: Gym Studio"
+              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none transition-all font-medium">
+              <span aria-hidden="true">💪</span> Gym Studio
             </button>
             <button data-preset="A dark theme SaaS platform called 'TaskSync AI' for team collaboration"
-              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
-              🚀 SaaS Platform
+              aria-label="Use preset: SaaS Platform"
+              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none transition-all font-medium">
+              <span aria-hidden="true">🚀</span> SaaS Platform
             </button>
             <button data-preset="A beautiful minimal design portfolio called 'Alex Reed Designs' in high-contrast white and emerald"
-              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
-              🎨 Resume Portfolio
+              aria-label="Use preset: Resume Portfolio"
+              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none transition-all font-medium">
+              <span aria-hidden="true">🎨</span> Resume Portfolio
             </button>
           </div>
         </div>
@@ -112,8 +116,8 @@
           <div class="grid grid-cols-2 gap-4">
             <!-- Theme Color Selector -->
             <div class="space-y-1.5">
-              <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Theme Color</label>
-              <select id="themeSelector" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none transition-all font-semibold">
+              <label for="themeSelector" class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Theme Color</label>
+              <select id="themeSelector" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 transition-all font-semibold">
                 <option value="green">Green & White (Light-Mode)</option>
                 <option value="blue">Blue / Indigo (Default)</option>
                 <option value="red">Red / Rose</option>
@@ -124,8 +128,8 @@
 
             <!-- Industry Selector -->
             <div class="space-y-1.5">
-              <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Industry Layout</label>
-              <select id="industrySelector" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none transition-all font-semibold">
+              <label for="industrySelector" class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Industry Layout</label>
+              <select id="industrySelector" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 transition-all font-semibold">
                 <option value="restaurant">Restaurant / Culinary Cafe</option>
                 <option value="saas">SaaS / Software Product</option>
                 <option value="portfolio">Personal Portfolio / Resume</option>
@@ -138,16 +142,16 @@
           <div class="grid grid-cols-2 gap-4">
             <!-- Brand Name Input -->
             <div class="space-y-1.5">
-              <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Brand Name</label>
+              <label for="brandNameInput" class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Brand Name</label>
               <input type="text" id="brandNameInput" placeholder="Auto-extracted"
-                class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none transition-all font-semibold">
+                class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 transition-all font-semibold">
             </div>
 
             <!-- Tagline Override -->
             <div class="space-y-1.5">
-              <label class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Tagline / Mission</label>
+              <label for="taglineInput" class="block text-[10px] font-extrabold uppercase tracking-widest text-slate-500">Tagline / Mission</label>
               <input type="text" id="taglineInput" placeholder="Auto-extracted"
-                class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none transition-all font-semibold">
+                class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-3 py-2.5 text-xs focus:border-emerald-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 transition-all font-semibold">
             </div>
           </div>
         </div>
@@ -158,11 +162,11 @@
         <div class="space-y-3">
           <label class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Export & Deployment Options</label>
           <div class="grid grid-cols-2 gap-3">
-            <button id="copyCodeBtn" class="bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2">
-              📋 Copy HTML
+            <button id="copyCodeBtn" aria-label="Copy generated HTML code to clipboard" class="bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none">
+              <span aria-hidden="true">📋</span> Copy HTML
             </button>
-            <button id="downloadBtn" class="bg-emerald-500/10 hover:bg-emerald-500/25 text-emerald-700 border border-emerald-200 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2">
-              📥 Download HTML
+            <button id="downloadBtn" aria-label="Download generated HTML file" class="bg-emerald-500/10 hover:bg-emerald-500/25 text-emerald-700 border border-emerald-200 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none">
+              <span aria-hidden="true">📥</span> Download HTML
             </button>
           </div>
           <button id="copyShareBtn" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2">
@@ -191,15 +195,15 @@
         </div>
 
         <!-- Viewport Size Switchers -->
-        <div class="flex bg-slate-50 rounded-xl p-1 border border-slate-200">
-          <button id="viewportDesktopBtn" data-device="desktop" class="viewport-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm">
-            🖥 Desktop
+        <div class="flex bg-slate-50 rounded-xl p-1 border border-slate-200" role="tablist" aria-label="Viewport Switchers">
+          <button id="viewportDesktopBtn" data-device="desktop" role="tab" aria-selected="true" aria-label="Desktop Viewport Preview" class="viewport-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none">
+            <span aria-hidden="true">🖥</span> Desktop
           </button>
-          <button id="viewportTabletBtn" data-device="tablet" class="viewport-btn px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5">
-            📱 Tablet
+          <button id="viewportTabletBtn" data-device="tablet" role="tab" aria-selected="false" aria-label="Tablet Viewport Preview" class="viewport-btn px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none">
+            <span aria-hidden="true">📱</span> Tablet
           </button>
-          <button id="viewportMobileBtn" data-device="mobile" class="viewport-btn px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5">
-            🤳 Mobile
+          <button id="viewportMobileBtn" data-device="mobile" role="tab" aria-selected="false" aria-label="Mobile Viewport Preview" class="viewport-btn px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:outline-none">
+            <span aria-hidden="true">🤳</span> Mobile
           </button>
         </div>
       </div>
