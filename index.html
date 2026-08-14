@@ -84,20 +84,20 @@
         <div class="space-y-2">
           <span class="block text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Need inspiration? Try these presets:</span>
           <div class="flex flex-wrap gap-2">
-            <button onclick="applyPreset('An elegant farm-to-table organic bistro called \'The Herb Garden\' with a gorgeous green and white layout')"
-              class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
+            <button data-preset="An elegant farm-to-table organic bistro called 'The Herb Garden' with a gorgeous green and white layout"
+              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
               🥗 Food Bistro
             </button>
-            <button onclick="applyPreset('A modern organic wellness yoga studio called \'Green Pulse\' featuring a green and white theme')"
-              class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
+            <button data-preset="A modern organic wellness yoga studio called 'Green Pulse' featuring a green and white theme"
+              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
               💪 Gym Studio
             </button>
-            <button onclick="applyPreset('A dark theme SaaS platform called \'TaskSync AI\' for team collaboration')"
-              class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
+            <button data-preset="A dark theme SaaS platform called 'TaskSync AI' for team collaboration"
+              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
               🚀 SaaS Platform
             </button>
-            <button onclick="applyPreset('A beautiful minimal design portfolio called \'Alex Reed Designs\' in high-contrast white and emerald')"
-              class="text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
+            <button data-preset="A beautiful minimal design portfolio called 'Alex Reed Designs' in high-contrast white and emerald"
+              class="preset-chip text-xs bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-600 py-2 px-3 rounded-xl transition-all font-medium">
               🎨 Resume Portfolio
             </button>
           </div>
@@ -162,7 +162,7 @@
               📋 Copy HTML
             </button>
             <button id="downloadBtn" class="bg-emerald-500/10 hover:bg-emerald-500/25 text-emerald-700 border border-emerald-200 py-3 px-4 rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2">
-              📥 Download ZIP
+              📥 Download HTML
             </button>
           </div>
         </div>
@@ -189,13 +189,13 @@
 
         <!-- Viewport Size Switchers -->
         <div class="flex bg-slate-50 rounded-xl p-1 border border-slate-200">
-          <button id="viewportDesktopBtn" onclick="changeViewport('desktop')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm">
+          <button id="viewportDesktopBtn" data-device="desktop" class="viewport-btn px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm">
             🖥 Desktop
           </button>
-          <button id="viewportTabletBtn" onclick="changeViewport('tablet')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5">
+          <button id="viewportTabletBtn" data-device="tablet" class="viewport-btn px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5">
             📱 Tablet
           </button>
-          <button id="viewportMobileBtn" onclick="changeViewport('mobile')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5">
+          <button id="viewportMobileBtn" data-device="mobile" class="viewport-btn px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5">
             🤳 Mobile
           </button>
         </div>

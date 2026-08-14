@@ -24,14 +24,17 @@ let currentSpecs = {
 };
 let currentGeneratedHTML = '';
 
-// Setup global hook for Preset Chips
-window.applyPreset = function(presetText) {
-  promptInput.value = presetText;
-  handleGeneration();
-};
+// Setup event listeners for Preset Chips
+document.querySelectorAll('.preset-chip').forEach(button => {
+  button.addEventListener('click', (e) => {
+    const presetText = e.currentTarget.getAttribute('data-preset');
+    promptInput.value = presetText;
+    handleGeneration();
+  });
+});
 
-// Setup global hook for Viewport Switchers
-window.changeViewport = function(device) {
+// Setup function for Viewport Switchers
+function changeViewport(device) {
   const btnDesktop = document.getElementById('viewportDesktopBtn');
   const btnTablet = document.getElementById('viewportTabletBtn');
   const btnMobile = document.getElementById('viewportMobileBtn');
@@ -51,7 +54,15 @@ window.changeViewport = function(device) {
     btnMobile.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-emerald-600 text-white flex items-center gap-1.5 shadow-sm';
     iframeWrapper.style.maxWidth = '410px';
   }
-};
+}
+
+// Bind viewport switchers
+document.querySelectorAll('.viewport-btn').forEach(button => {
+  button.addEventListener('click', (e) => {
+    const device = e.currentTarget.getAttribute('data-device');
+    changeViewport(device);
+  });
+});
 
 /**
  * Initiates the parsing and rendering process
